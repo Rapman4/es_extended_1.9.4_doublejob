@@ -30,11 +30,11 @@ Core.PlayerFunctionOverrides.QSInventory = {
         if self.accounts[i].name == account then
           local accounts = exports['qs-inventory']:GetAccounts()
           if accounts[account] then
-            self.accounts[i].money = self.getInventoryItem(account).count
+            self.accounts[i].money = exports['qs-inventory']:GetItemTotalAmount(self.source, account)
           end
           return self.accounts[i]
         end
-		  end
+          end
     end
   end,
 
@@ -51,8 +51,8 @@ Core.PlayerFunctionOverrides.QSInventory = {
           self.triggerEvent('esx:setAccountMoney', account)
           TriggerEvent('esx:setAccountMoney', self.source, accountName, money, reason)
           local accounts = exports['qs-inventory']:GetAccounts()
-          if accounts[accountName] then
-            exports['qs-inventory']:SetInventoryItem(self.source, accountName, money)
+          if accounts[accountName] and reason ~= 'dropped' then
+            exports['qs-inventory']:SetInventoryItems(self.source, accountName, money)
           end
         end
       end
