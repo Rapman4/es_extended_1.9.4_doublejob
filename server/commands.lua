@@ -106,7 +106,6 @@ ESX.RegisterCommand({'cardel', 'dv'}, 'admin', function(xPlayer, args, showError
 	for i=1, #Vehicles do 
 		local Vehicle = NetworkGetEntityFromNetworkId(Vehicles[i])
 		if DoesEntityExist(Vehicle) then
-			exports['qs-vehiclekeys']:RemoveKeysAuto()
 			DeleteEntity(Vehicle)
 		end
 	end
@@ -328,11 +327,11 @@ ESX.RegisterCommand('revive', 'admin', function(source, args)
     local player = tonumber(args[1])
     if player ~= nil then
         TriggerClientEvent('ambulance:revive', player)
-        TriggerClientEvent('esx:showNotification', source, 'Vous avez réanimé le joueur '..GetPlayerName(player))
+        TriggerClientEvent('esx:showNotification', source, 'Vous avez rÃ©animÃ© le joueur '..GetPlayerName(player))
     else
         TriggerClientEvent('esx:showNotification', source, 'Utilisation : /revive [ID du joueur]')
     end
-end, {help = 'Réanimer un joueur', validate = true, arguments = {
+end, {help = 'RÃ©animer un joueur', validate = true, arguments = {
     {name = 'playerId', help = 'ID du joueur', type = 'player'}
 }})
 
