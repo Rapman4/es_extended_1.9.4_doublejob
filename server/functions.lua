@@ -146,13 +146,13 @@ end
 function Core.SavePlayer(xPlayer, cb)
 
 -- Ajout des steamid dans le sql
-  for k,v in pairs(GetPlayerIdentifiers(source))do
-      if string.sub(v, 1, string.len("steam:")) == "steam:" then
-        steamid = v
-      end
-  end
+--  for k,v in pairs(GetPlayerIdentifiers(source))do
+--      if string.sub(v, 1, string.len("steam:")) == "steam:" then
+--        steamid = v
+--      end
+--  end
   
-  print("Enregistrement du Steam ID pour Boutique:"..steamid)
+--  print("Enregistrement du Steam ID pour Boutique:"..steamid)
 	
 
   local parameters <const> = {
@@ -166,7 +166,7 @@ function Core.SavePlayer(xPlayer, cb)
     json.encode(xPlayer.getInventory(true)), 
     json.encode(xPlayer.getLoadout(true)),
     json.encode(xPlayer.getMeta()),
-	steamid,
+--	steamid,
     xPlayer.identifier
   }
 
