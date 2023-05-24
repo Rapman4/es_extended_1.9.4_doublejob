@@ -74,7 +74,11 @@ function ESX.Progressbar(message, length, Options)
 end
 
 function ESX.ShowNotification(message, type, length)
-    exports.bulletin:Send(message)
+    if GetResourceState("esx_notify") ~= "missing" then
+        return exports["esx_notify"]:Notify(type, length, message)
+    end
+
+    print("[^1ERROR^7] ^5ESX Notify^7 is Missing!")
 end
     
     
@@ -95,7 +99,16 @@ function ESX.HideUI()
 end
 
 function ESX.ShowAdvancedNotification(sender, subject, msg, textureDict, iconType, flash, saveToBrief, hudColorIndex)
-    exports.bulletin:Send(msg)
+    if saveToBrief == nil then
+        saveToBrief = true
+    end
+    AddTextEntry('esxAdvancedNotification', msg)
+    BeginTextCommandThefeedPost('esxAdvancedNotification')
+    if hudColorIndex then
+        ThefeedSetNextPostBackgroundColor(hudColorIndex)
+    end
+    EndTextCommandThefeedPostMessagetext(textureDict, textureDict, false, iconType, sender, subject)
+    EndTextCommandThefeedPostTicker(flash or false, saveToBrief)
 end
 
 function ESX.ShowHelpNotification(msg, thisFrame, beep, duration)
